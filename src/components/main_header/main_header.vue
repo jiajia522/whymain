@@ -1,7 +1,12 @@
 <template>
   <div class="main-header">
     <div class="menu-icon">
-      <el-icon size="20px"><Fold /></el-icon>
+      <el-icon size="20px" @click="changeNav">
+        <!-- <Fold /> -->
+        
+        <component :is=" flogRef ? 'fold':'expand'"></component>
+      </el-icon>
+
     </div>
     <div class="content">
       <header-crumt>
@@ -15,7 +20,13 @@
 </template>
 
 <script setup lang="ts">
-
+import { ref } from "vue";
+  const emit =  defineEmits(['changeNavFlag'])
+  const flogRef = ref(false)
+  const changeNav = ()=>{
+    flogRef.value = !flogRef.value
+    emit('changeNavFlag',flogRef.value)
+  }
 </script>
 
 <style scoped lang="less">

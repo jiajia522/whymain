@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-container class="main-content">
-      <el-aside width="200px">
-          <main_menu></main_menu>
+      <el-aside :width="navFlag?'60px':'210px'" >
+          <main_menu :navFlag="navFlag" ></main_menu>
       </el-aside>
       <el-container>
         <el-header height="50px">
-          <main_header> </main_header>
+          <main_header @changeNavFlag = 'handleChangeNav'> </main_header>
         </el-header>
         <el-main>
           <button @click="quitLogin">退出登录</button>
@@ -22,14 +22,22 @@ import router from '@/router';
 import { localCache } from '@/utils/cache';
 import main_menu from '@/components/main_menu/main_menu.vue';
 import main_header from '@/components/main_header/main_header.vue';
+import { ref } from 'vue';
   const quitLogin = () =>{
     localCache.removeCache(LOGIN_TOKEN)
     router.push('/login')
+  }
+  const navFlag = ref(false)
+  const handleChangeNav = (flag:boolean) =>{
+    navFlag.value = flag
   }
 </script>
 
 <style scoped>
 .main-content{
   height:100vh;
+}
+.el-aside{
+  transition: width 0.3s ease;
 }
 </style>
