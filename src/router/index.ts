@@ -1,7 +1,6 @@
 import { LOGIN_TOKEN } from '@/global/constants'
 import { localCache } from '@/utils/cache'
 import { createRouter, createWebHashHistory } from 'vue-router'
-
 const router = createRouter({
   history: createWebHashHistory(),
   // 映射关系: path => component
@@ -17,7 +16,8 @@ const router = createRouter({
     {
       path: '/main',
       name: 'main',
-      component: () => import('../views/main/Main.vue')
+      component: () => import('../views/main/Main.vue'),
+      children:[]
     }
     // ,
     // {

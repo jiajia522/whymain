@@ -16,7 +16,7 @@
         :collapse="navFlag"
       >
       <template v-for="(item) in userMenus" :key="item.id" >
-        <el-sub-menu :index="item.id">
+        <el-sub-menu :index="item.id+''" >
           <template #title>
             <el-icon>
               <component :is="item.icon.split('-icon-')[1]"></component>
@@ -24,7 +24,7 @@
             <span>{{ item.name }}</span>
           </template>
           <template v-for='(subitem) in item.children' :key="subitem.id">
-            <el-menu-item :index="subitem.id">{{ subitem.name }}</el-menu-item>
+            <el-menu-item :index="subitem.id+''" @click="handleItemClick(subitem)">{{ subitem.name }}</el-menu-item>
           </template>
         </el-sub-menu>
        
@@ -36,26 +36,23 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login';
-import { ref } from 'vue';
-defineProps({
-  'navFlag':{
-    type: Boolean,
-    default: false
-  }
-}
-  
-)
+// import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+  defineProps({
+    'navFlag':{
+      type: Boolean,
+      default: false
+    }
+    }
+  )
 const loginStore = useLoginStore()
+const router = useRouter()
 const userMenus = loginStore.userMenus;
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const isCollapse = ref(false)
 
+const handleItemClick = (subitem:any) => {
+    router.push(subitem.url)
+  }
 </script>
 
 <style scoped lang="less">

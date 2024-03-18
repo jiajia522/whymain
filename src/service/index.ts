@@ -10,7 +10,6 @@ const http = axios.create({
 // 请求拦截器：在发送请求前添加token
 http.interceptors.request.use(config => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  console.log(token)
   if (token) {
    config.headers.Authorization = 'Bearer ' + token
    console.log(config.headers.Authorization)

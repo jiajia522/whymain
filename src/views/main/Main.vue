@@ -9,8 +9,9 @@
           <main_header @changeNavFlag = 'handleChangeNav'> </main_header>
         </el-header>
         <el-main>
-          <button @click="quitLogin">退出登录</button>
-          </el-main>
+          <router-view></router-view>
+          
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -23,10 +24,7 @@ import { localCache } from '@/utils/cache';
 import main_menu from '@/components/main_menu/main_menu.vue';
 import main_header from '@/components/main_header/main_header.vue';
 import { ref } from 'vue';
-  const quitLogin = () =>{
-    localCache.removeCache(LOGIN_TOKEN)
-    router.push('/login')
-  }
+  
   const navFlag = ref(false)
   const handleChangeNav = (flag:boolean) =>{
     navFlag.value = flag
