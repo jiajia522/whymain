@@ -41,7 +41,7 @@ const isRemPwd = ref(localCache.getCache('isRemPwd') ?? false)
 watch(isRemPwd,(newValue)=>{
   isRemPwd.value = newValue
   // console.log(newValue)
-  localCache.setCache('isRemPwd',newValue)
+  // localCache.setCache('isRemPwd',newValue)
 })
 const accountRef = ref()
 const login = ()=>{

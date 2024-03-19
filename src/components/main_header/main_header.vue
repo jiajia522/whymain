@@ -9,17 +9,15 @@
 
     </div>
     <div class="content">
-      <header-crumt>
-        <slot>面包屑</slot>
-      </header-crumt>
-      <header-info>
-        <slot>个人信息</slot>
-      </header-info>
+      <header_crumt></header_crumt>
+      <header_info></header_info>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import header_crumt from "./header_crumt.vue";
+import header_info from "./header_info.vue";
 import { ref } from "vue";
   const emit =  defineEmits(['changeNavFlag'])
   const flogRef = ref(false)

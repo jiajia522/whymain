@@ -10,5 +10,7 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+app.use(store)
 
-app.use(router).use(store).mount('#app')
+app.use(router)
+app.mount('#app')

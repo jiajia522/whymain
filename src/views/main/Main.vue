@@ -38,4 +38,8 @@ import { ref } from 'vue';
 .el-aside{
   transition: width 0.3s ease;
 }
+.el-main{
+  background: #f0f2f5;
+  /* padding: 20px */
+}
 </style>

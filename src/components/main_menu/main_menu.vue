@@ -6,10 +6,9 @@
     </div>
     <div class="menu">
       <el-menu
-        default-active="3"
+        :default-active="defaultActive"
         class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
+
         text-color="#b7bdc3"
         active-text-color="#fff"
         background-color="#001529"
@@ -19,6 +18,7 @@
         <el-sub-menu :index="item.id+''" >
           <template #title>
             <el-icon>
+              <!-- 动态组件 -->
               <component :is="item.icon.split('-icon-')[1]"></component>
             </el-icon>
             <span>{{ item.name }}</span>
@@ -36,8 +36,9 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login';
-// import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, ref } from 'vue';
+import { useRouter ,useRoute} from 'vue-router';
+import { mapPathToMenu } from '@/utils/map-menus'
   defineProps({
     'navFlag':{
       type: Boolean,
@@ -51,8 +52,19 @@ const userMenus = loginStore.userMenus;
 
 
 const handleItemClick = (subitem:any) => {
-    router.push(subitem.url)
-  }
+  router.push(subitem.url)
+}
+
+const route = useRoute()
+
+const defaultActive = computed(()=>{
+  return mapPathToMenu(route.path,userMenus).id+''
+})
+
+
+
+
+
 </script>
 
 <style scoped lang="less">
